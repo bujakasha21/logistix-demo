@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+import type { Request } from "@/types/request";
 
 const PrevoznikPage = () => {
+  const [newRequest, setNewRequest] = useState<Request | null>(null);
   const [polaziste, setPolaziste] = useState("");
   const [odrediste, setOdrediste] = useState("");
   const [teret, setTeret] = useState("");
@@ -14,7 +16,16 @@ const PrevoznikPage = () => {
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log({ polaziste, odrediste, teret, datum });
+    const request: Request = {
+      polaziste,
+      odrediste,
+      teret,
+      datum,
+      status: "Otvoren",
+    };
+
+    console.log(newRequest);
+    setNewRequest(request);
 
     setIsModalOpen(true);
   };

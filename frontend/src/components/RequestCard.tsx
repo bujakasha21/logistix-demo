@@ -1,10 +1,4 @@
-type Request = {
-  polaziste: string;
-  odrediste: string;
-  teret: string;
-  datum: string;
-  status: string;
-};
+import type { Request } from "@/types/request";
 
 const RequestCard = ({ request, num }: { request: Request; num: number }) => {
   return (
