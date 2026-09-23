@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.schemas import Request
+from app.schemas import Request, RequestCreate
 
 app = FastAPI()
 
@@ -23,3 +23,17 @@ def get_requests():
         "status": "Otvoren"
     }
 ]
+    
+@app.post("/requests", response_model=Request)
+def post_requests(request: RequestCreate):
+    return {    
+        "id": 3,
+        "polaziste": request.polaziste,
+        "odrediste": request.odrediste,
+        "teret": request.teret,
+        "datum": request.datum,
+        "status": "Otvoren"
+    }
+    
+    
+    

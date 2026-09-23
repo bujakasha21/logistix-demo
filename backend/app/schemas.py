@@ -7,3 +7,9 @@ class Request(BaseModel):
     teret: str
     datum: str
     status: str
+    
+class RequestCreate(BaseModel):
+    polaziste: str
+    odrediste: str
+    teret: str
+    datum: str
