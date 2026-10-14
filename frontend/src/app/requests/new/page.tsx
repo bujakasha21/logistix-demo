@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { Request } from "@/types/request";
 
 const PrevoznikPage = () => {
@@ -28,6 +28,27 @@ const PrevoznikPage = () => {
     setNewRequest(request);
 
     setIsModalOpen(true);
+  };
+
+  const handleConfirm = async () => {
+    if (!newRequest) {
+      return;
+    }
+
+    const fetchReq = await fetch("http://127.0.0.1:8000/requests", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newRequest),
+    });
+
+    if (!fetchReq.ok) {
+      return;
+    }
+
+    setIsCreated(true);
+    setIsModalOpen(false);
   };
 
   return (
@@ -96,14 +117,7 @@ const PrevoznikPage = () => {
             <p>Datum: {datum}</p>
             <div className="flex items-center justify-between gap-5">
               <button onClick={() => setIsModalOpen(false)}>Izmijeni</button>
-              <button
-                onClick={() => {
-                  setIsCreated(true);
-                  setIsModalOpen(false);
-                }}
-              >
-                Potvrdi zahtjev
-              </button>
+              <button onClick={handleConfirm}>Potvrdi zahtjev</button>
             </div>
           </div>
         </div>
